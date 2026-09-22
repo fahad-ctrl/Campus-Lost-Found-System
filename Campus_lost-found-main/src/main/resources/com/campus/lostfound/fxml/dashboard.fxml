@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.campus.lostfound.controller.DashboardController">
+
+    <left>
+        <VBox styleClass="sidebar" prefWidth="200" spacing="4" BorderPane.alignment="CENTER">
+            <Label text="CAMPUS" styleClass="sidebar-brand"/>
+            <Label text="LOST &amp; FOUND" styleClass="sidebar-brand"/>
+            <Label text="DASHBOARD" styleClass="sidebar-tag"/>
+            <Region minHeight="20"/>
+
+            <Button text="🏠  Dashboard" styleClass="nav-button" onAction="#handleGoToDashboard"/>
+            <Button text="📝  Report an Item" styleClass="nav-button" onAction="#handleGoToReport"/>
+            <Button text="🔍  Search &amp; Matches" styleClass="nav-button" onAction="#handleGoToSearch"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="⎋  Log Out" styleClass="nav-button" onAction="#handleLogout"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="18" style="-fx-padding: 28;">
+            <VBox spacing="2">
+                <Label fx:id="welcomeLabel" styleClass="page-title" text="Welcome back"/>
+                <Label text="Here's what's happening with your reports." styleClass="page-subtitle"/>
+            </VBox>
+
+            <HBox spacing="16">
+                <VBox styleClass="card" spacing="4" prefWidth="160">
+                    <Label text="MY REPORTS" styleClass="field-label"/>
+                    <Label fx:id="myReportsCountLabel" text="0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #123a63;"/>
+                </VBox>
+                <VBox styleClass="card" spacing="4" prefWidth="160">
+                    <Label text="ACTIVE MATCHES" styleClass="field-label"/>
+                    <Label fx:id="matchesCountLabel" text="0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1f6fb2;"/>
+                </VBox>
+                <VBox styleClass="card" spacing="4" prefWidth="160">
+                    <Label text="UNREAD ALERTS" styleClass="field-label"/>
+                    <Label fx:id="notificationsCountLabel" text="0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #a67c00;"/>
+                </VBox>
+            </HBox>
+
+            <VBox styleClass="card" spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="My Reported Items" styleClass="section-label"/>
+                <TableView fx:id="itemsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="typeColumn" text="Type" prefWidth="70"/>
+                        <TableColumn fx:id="categoryColumn" text="Category" prefWidth="120"/>
+                        <TableColumn fx:id="locationColumn" text="Location" prefWidth="150"/>
+                        <TableColumn fx:id="dateColumn" text="Date" prefWidth="100"/>
+                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <VBox styleClass="card" spacing="10">
+                <Label text="Recent Notifications" styleClass="section-label"/>
+                <ListView fx:id="notificationsList" prefHeight="120"/>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

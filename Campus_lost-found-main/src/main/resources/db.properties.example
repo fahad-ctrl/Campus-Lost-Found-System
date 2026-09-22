@@ -1,0 +1,6 @@
+# Copy this file to db.properties (same folder) and fill in your local MySQL details.
+# db.properties is git-ignored so credentials are never committed.
+
+db.url=jdbc:mysql://localhost:3306/campus_lost_found?useSSL=false&serverTimezone=UTC
+db.user=root
+db.password=your_password_here

@@ -1,0 +1,163 @@
+/* ===========================================================
+   Campus Lost & Found - Shared Stylesheet
+   Color palette matches the project's presentation deck:
+   navy background, sky-blue accent.
+   =========================================================== */
+
+.root {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-background-color: #f5f8fc;
+}
+
+/* ---------- Headings ---------- */
+.page-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #123a63;
+}
+
+.page-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6b7488;
+}
+
+.section-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #123a63;
+}
+
+/* ---------- Panels / Cards ---------- */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(18,58,99,0.12), 10, 0, 0, 2);
+}
+
+.sidebar {
+    -fx-background-color: linear-gradient(to bottom, #101a2b, #16233b);
+    -fx-padding: 24 16 24 16;
+}
+
+.sidebar-brand {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.sidebar-tag {
+    -fx-font-size: 9px;
+    -fx-text-fill: #6fb7ff;
+}
+
+/* ---------- Buttons ---------- */
+.button-primary {
+    -fx-background-color: #1f6fb2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 9 22 9 22;
+    -fx-cursor: hand;
+}
+.button-primary:hover {
+    -fx-background-color: #185a92;
+}
+
+.button-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1f6fb2;
+    -fx-border-color: #1f6fb2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8 20 8 20;
+    -fx-cursor: hand;
+}
+.button-secondary:hover {
+    -fx-background-color: #eef5fc;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b9c6de;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 12.5px;
+    -fx-padding: 10 12 10 12;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-max-width: Infinity;
+}
+.nav-button:hover, .nav-button:selected {
+    -fx-background-color: #1c3a5e;
+    -fx-text-fill: white;
+}
+
+/* ---------- Form fields ---------- */
+.field-label {
+    -fx-font-size: 11.5px;
+    -fx-text-fill: #3d4657;
+    -fx-font-weight: bold;
+}
+
+.text-field, .text-area, .combo-box, .date-picker {
+    -fx-background-color: #f5f8fc;
+    -fx-border-color: #d7dee8;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 6;
+}
+.text-field:focused, .text-area:focused, .combo-box:focused, .date-picker:focused {
+    -fx-border-color: #1f6fb2;
+}
+
+.error-label {
+    -fx-text-fill: #c0392b;
+    -fx-font-size: 11px;
+}
+
+.status-label {
+    -fx-text-fill: #1f7a4d;
+    -fx-font-size: 11px;
+}
+
+/* ---------- Tables / Lists ---------- */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #e2e6ec;
+}
+.table-view .column-header-background {
+    -fx-background-color: #123a63;
+}
+.table-view .column-header-background .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.table-row-cell:odd {
+    -fx-background-color: #f5f8fc;
+}
+
+/* ---------- Badges ---------- */
+.badge-pending {
+    -fx-background-color: #fdf3d8;
+    -fx-text-fill: #a67c00;
+    -fx-background-radius: 10;
+    -fx-padding: 3 10 3 10;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+.badge-matched {
+    -fx-background-color: #dcecfb;
+    -fx-text-fill: #1f6fb2;
+    -fx-background-radius: 10;
+    -fx-padding: 3 10 3 10;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+.badge-claimed {
+    -fx-background-color: #dcf5e6;
+    -fx-text-fill: #1f7a4d;
+    -fx-background-radius: 10;
+    -fx-padding: 3 10 3 10;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}

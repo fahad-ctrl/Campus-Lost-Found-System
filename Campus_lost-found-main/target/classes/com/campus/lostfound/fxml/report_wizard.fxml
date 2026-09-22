@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.campus.lostfound.controller.ReportController">
+
+    <left>
+        <VBox styleClass="sidebar" prefWidth="200" spacing="4" BorderPane.alignment="CENTER">
+            <Label text="CAMPUS" styleClass="sidebar-brand"/>
+            <Label text="LOST &amp; FOUND" styleClass="sidebar-brand"/>
+            <Label text="REPORT WIZARD" styleClass="sidebar-tag"/>
+            <Region minHeight="20"/>
+
+            <Button text="🏠  Dashboard" styleClass="nav-button" onAction="#handleGoToDashboard"/>
+            <Button text="📝  Report an Item" styleClass="nav-button" onAction="#handleGoToReport"/>
+            <Button text="🔍  Search &amp; Matches" styleClass="nav-button" onAction="#handleGoToSearch"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="⎋  Log Out" styleClass="nav-button" onAction="#handleLogout"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="18" style="-fx-padding: 28;" maxWidth="620">
+            <VBox spacing="2">
+                <Label text="Report a Lost or Found Item" styleClass="page-title"/>
+                <Label text="A few quick details helps our matching engine find it faster." styleClass="page-subtitle"/>
+            </VBox>
+
+            <VBox styleClass="card" spacing="16">
+
+                <VBox spacing="8">
+                    <Label text="THIS ITEM WAS" styleClass="field-label"/>
+                    <HBox spacing="24">
+                        <fx:define>
+                            <ToggleGroup fx:id="itemTypeGroup"/>
+                        </fx:define>
+                        <RadioButton fx:id="lostRadio" text="Lost" toggleGroup="$itemTypeGroup" selected="true"/>
+                        <RadioButton fx:id="foundRadio" text="Found" toggleGroup="$itemTypeGroup"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="CATEGORY" styleClass="field-label"/>
+                    <ComboBox fx:id="categoryCombo" maxWidth="Infinity" promptText="Select a category"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="LOCATION" styleClass="field-label"/>
+                    <ComboBox fx:id="locationCombo" maxWidth="Infinity" promptText="Select a location"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="DATE" styleClass="field-label"/>
+                    <DatePicker fx:id="datePicker" maxWidth="Infinity"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="DESCRIPTION" styleClass="field-label"/>
+                    <TextArea fx:id="descriptionArea" wrapText="true" prefRowCount="4"
+                              promptText="Color, brand, any identifying details..."/>
+                </VBox>
+
+                <Label fx:id="feedbackLabel" wrapText="true" managed="false" visible="false"/>
+
+                <Button text="Submit Report" styleClass="button-primary" onAction="#handleSubmit"/>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
