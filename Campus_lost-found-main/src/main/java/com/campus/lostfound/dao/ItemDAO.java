@@ -25,6 +25,7 @@ public class ItemDAO {
             "JOIN categories c ON c.id = i.category_id " +
             "JOIN locations l ON l.id = i.location_id ";
 
+
     public Item insert(Item item) throws SQLException {
         String sql = "INSERT INTO items (reporter_id, item_type, category_id, location_id, item_date, description, status) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -35,7 +36,7 @@ public class ItemDAO {
             ps.setString(2, item.getItemType().name());
             ps.setInt(3, item.getCategoryId());
             ps.setInt(4, item.getLocationId());
-            ps.setDate(5, Date.valueOf(item.getItemDate()));
+            ps.setString(5, item.getItemDate() != null ? item.getItemDate().toString() : LocalDate.now().toString());
             ps.setString(6, item.getDescription());
             ps.setString(7, item.getStatus().name());
             ps.executeUpdate();
@@ -168,6 +169,7 @@ public class ItemDAO {
     }
 
     private Item mapRow(ResultSet rs) throws SQLException {
+
         Item item = new Item();
         item.setId(rs.getInt("id"));
         item.setReporterId(rs.getInt("reporter_id"));
@@ -176,11 +178,56 @@ public class ItemDAO {
         item.setCategoryName(rs.getString("category_name"));
         item.setLocationId(rs.getInt("location_id"));
         item.setLocationName(rs.getString("location_name"));
-        LocalDate date = rs.getDate("item_date").toLocalDate();
+        LocalDate date = null;
+        try {
+            String dateStr = rs.getString("item_date");
+            if (dateStr != null && !dateStr.isBlank()) {
+                if (dateStr.matches("^\\d+$")) {
+                    long val = Long.parseLong(dateStr);
+                    if (val < 10000000000L) { // seconds
+                        date = java.time.Instant.ofEpochSecond(val)
+                                .atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+                    } else { // milliseconds
+                        date = java.time.Instant.ofEpochMilli(val)
+                                .atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+                    }
+                } else {
+                    date = LocalDate.parse(dateStr.length() >= 10 ? dateStr.substring(0, 10) : dateStr);
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        if (date == null) {
+            try {
+                Date sqlDate = rs.getDate("item_date");
+                if (sqlDate != null) {
+                    date = sqlDate.toLocalDate();
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        if (date == null) {
+            date = LocalDate.now();
+        }
         item.setItemDate(date);
         item.setDescription(rs.getString("description"));
         item.setStatus(ItemStatus.valueOf(rs.getString("status")));
         item.setReferenceCode(rs.getString("reference_code"));
         return item;
+    }
+
+    // Retrieve all items as a list (used for JSON export)
+    public List<Item> findAll() throws SQLException {
+        String sql = SELECT_BASE + "ORDER BY i.id";
+        List<Item> results = new ArrayList<>();
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    results.add(mapRow(rs));
+                }
+            }
+        }
+        return results;
     }
 }

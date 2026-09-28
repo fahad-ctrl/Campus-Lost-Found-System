@@ -50,7 +50,16 @@ public class NotificationDAO {
                     n.setMatchId(rs.wasNull() ? null : matchId);
                     n.setMessage(rs.getString("message"));
                     n.setRead(rs.getBoolean("is_read"));
-                    n.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                    Timestamp ts = null;
+                    try {
+                        ts = rs.getTimestamp("created_at");
+                    } catch (Exception ignored) {
+                    }
+                    if (ts != null) {
+                        n.setCreatedAt(ts.toLocalDateTime());
+                    } else {
+                        n.setCreatedAt(java.time.LocalDateTime.now());
+                    }
                     results.add(n);
                 }
             }

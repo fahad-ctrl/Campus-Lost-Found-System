@@ -1,8 +1,6 @@
 package com.campus.lostfound.model;
 
-/**
- * Represents an application user (student, faculty, or staff).
- */
+
 public class User {
 
     private int id;

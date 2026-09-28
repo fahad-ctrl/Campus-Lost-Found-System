@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Lost &amp; Found (App)" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.campus.lostfound.Launcher" />
+    <module name="campus-lost-and-found" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Campus_lost-found-main" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

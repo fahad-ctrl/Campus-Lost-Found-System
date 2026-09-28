@@ -37,6 +37,7 @@ public class ReportService {
         Item item = new Item(reporterId, type, categoryId, locationId, itemDate, description.trim());
         item.setStatus(ItemStatus.PENDING);
         itemDAO.insert(item);
+        item = itemDAO.findById(item.getId()).orElse(item);
 
         List<MatchRecord> matches = matchEngine.findAndSaveMatches(item);
         if (!matches.isEmpty()) {
